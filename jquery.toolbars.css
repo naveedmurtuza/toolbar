@@ -11,8 +11,9 @@
 	box-shadow: 0px 0px 15px #000;
 	position: absolute;				
 }
-
-.tool-container.tool-top, .tool-container.tool-bottom {
+.tool-container.tool-left-horizontal, .tool-container.tool-right-horizontal,
+.tool-container.tool-top-horizontal, .tool-container.tool-bottom-horizontal
+{
 	height: 34px;
 	border-bottom: 1px solid #beb8b8 ; /* #B1A9A9 */
 }
@@ -20,14 +21,16 @@
 .tool-items {
 	height: 100%;	
 }
-
-.tool-top .tool-item, .tool-bottom .tool-item {
+.tool-left-horizontal .tool-item, .tool-right-horizontal .tool-item,
+.tool-top-horizontal .tool-item, .tool-bottom-horizontal .tool-item
+{
 	float: left;
 	border-right: 1px solid #e2dfdf;
 	border-left: 1px solid #9f9898;
 }
-
-.tool-left .tool-item, .tool-right .tool-item {
+.tool-left-vertical .tool-item, .tool-right-vertical .tool-item,
+.tool-top-vertical .tool-item, .tool-bottom-vertical .tool-item
+{
 	height: 34px;
 	border-top: 1px solid #e2dfdf;
 	border-bottom: 1px solid #9f9898;
@@ -44,8 +47,8 @@
 .tool-item:first-child {
 	border-left: none;
 }
-
-.tool-left .tool-item:first-child, .tool-right .tool-item:first-child {
+.tool-top-vertical .tool-item:first-child, .tool-bottom-vertical .tool-item:first-child,
+.tool-left-vertical .tool-item:first-child, .tool-right-vertical .tool-item:first-child {
 	border-top: 1px solid transparent;
 }
 
@@ -64,22 +67,23 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a79f9f', endColorstr='#e2dfdf',GradientType=0 );
 }
 
-.tool-top .tool-item:last-child:hover, .tool-bottom .tool-item:last-child:hover {
+.tool-left-horizontal .tool-item:last-child:hover, .tool-right-horizontal .tool-item:last-child:hover,
+.tool-top-horizontal .tool-item:last-child:hover, .tool-bottom-horizontal .tool-item:last-child:hover {
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
-
-.tool-top  .tool-item:first-child:hover, .tool-bottom  .tool-item:first-child:hover {
+.tool-left-horizontal .tool-item:first-child:hover, .tool-right-horizontal .tool-item:first-child:hover,
+.tool-top-horizontal  .tool-item:first-child:hover, .tool-bottom-horizontal  .tool-item:first-child:hover {
 	border-top-left-radius: 4px;
 	border-bottom-left-radius: 4px;
 }
-
-.tool-left .tool-item:last-child:hover, .tool-right .tool-item:last-child:hover {
+.tool-top-vertical  .tool-item:last-child:hover, .tool-bottom-vertical  .tool-item:last-child:hover,
+.tool-left-vertical .tool-item:last-child:hover, .tool-right-vertical .tool-item:last-child:hover {
 	border-bottom-right-radius: 4px;
 	border-bottom-left-radius: 4px;
 }
-
-.tool-left .tool-item:first-child:hover, .tool-right .tool-item:first-child:hover {
+.tool-top-vertical  .tool-item:first-child:hover, .tool-bottom-vertical  .tool-item:first-child:hover,
+.tool-left-vertical .tool-item:first-child:hover, .tool-right-vertical .tool-item:first-child:hover {
 	border-top-right-radius: 4px;
 	border-top-left-radius: 4px;
 }
@@ -92,28 +96,28 @@
 	border-style:solid;
 }
 
-.tool-container.tool-top .arrow {
+.tool-container.tool-top-horizontal .arrow,.tool-container.tool-top-vertical .arrow {
 	border-color: #e9e5e5 transparent transparent; 
 	left: 50%;  
 	bottom: -14px;
 	margin-left: -7px;
 }
 
-.tool-container.tool-bottom .arrow {
+.tool-container.tool-bottom-horizontal .arrow,.tool-container.tool-bottom-vertical .arrow {
 	border-color: transparent transparent #e9e5e5; 
 	left: 50%;  
 	top: -14px;
 	margin-left: -7px;
 }
 
-.tool-container.tool-left .arrow {
+.tool-container.tool-left-vertical .arrow,.tool-container.tool-left-horizontal .arrow {
 	border-color: transparent transparent transparent #E9E5E5;
 	top: 50%;
 	right: -14px;
 	margin-top: -7px;
 }
 
-.tool-container.tool-right .arrow {
+.tool-container.tool-right-vertical .arrow,.tool-container.tool-right-horizontal .arrow {
 	border-color: transparent #E9E5E5 transparent transparent;
 	top: 50%;
 	left: -14px;

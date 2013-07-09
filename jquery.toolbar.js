@@ -12,6 +12,9 @@
  * Copyright 2013 Paul Kinzett (http://kinzett.co.nz/)
  * Released under the MIT license.
  * <https://raw.github.com/paulkinzett/toolbar/master/LICENSE.txt>
+ * @author  Naveed Quadri (naveedmurtuza@gmail.com)
+ *          Modified this script to support orientation.
+ * 
  */
 
 if ( typeof Object.create !== 'function' ) {
@@ -31,7 +34,7 @@ if ( typeof Object.create !== 'function' ) {
             self.$elem = $( elem );
             self.options = $.extend( {}, $.fn.toolbar.options, options );
             self.toolbar = $('<div class="tool-container gradient" />')
-                .addClass('tool-'+self.options.position)
+                .addClass('tool-'+self.options.position+'-'+self.options.orientation)
                 .addClass('tool-rounded')
                 .append('<div class="tool-items" />')
                 .append('<div class="arrow" />')
@@ -112,33 +115,40 @@ if ( typeof Object.create !== 'function' ) {
             if (self.options.adjustment && self.options.adjustment[self.options.position]) {
                 adjustment = self.options.adjustment[self.options.position];
             }
-
+            var leftValue,topValue;
             switch(self.options.position) {
                 case 'top':
-                    return {
-                        left: self.coordinates.left-(self.toolbar.width()/2)+(self.$elem.outerWidth()/2),
-                        top: self.coordinates.top-self.$elem.height()-adjustment,
-                        right: 'auto'
-                    };
+                        leftValue = self.coordinates.left-(self.toolbar.width()/2)+(self.$elem.outerWidth()/2);
+                        topValue =
+                        self.options.orientation == 'horizontal'
+                        ? self.coordinates.top-self.$elem.height()-adjustment
+                        : self.coordinates.top-self.toolbar.height()-adjustment;
+                        break;
                 case 'left':
-                    return {
-                        left: self.coordinates.left-(self.toolbar.width()/2)-(self.$elem.width()/2)-adjustment,
-                        top: self.coordinates.top-(self.toolbar.height()/2)+(self.$elem.outerHeight()/2),
-                        right: 'auto'
-                    };
+                        leftValue = self.options.orientation == 'vertical'
+                        ? self.coordinates.left-(self.toolbar.width()/2)-(self.$elem.width()/2)-adjustment
+                        : self.coordinates.left-self.toolbar.width()-adjustment;
+                        topValue  = self.coordinates.top-(self.toolbar.height()/2)+(self.$elem.outerHeight()/2);
+                        break;
                 case 'right':
-                    return {
-                        left: self.coordinates.left+(self.toolbar.width()/2)+(self.$elem.width()/3)+adjustment,
-                        top: self.coordinates.top-(self.toolbar.height()/2)+(self.$elem.outerHeight()/2),
-                        right: 'auto'
-                    };
+                        leftValue = self.options.orientation == 'vertical'
+                        ? self.coordinates.left+(self.toolbar.width()/2)+(self.$elem.width()/3)+adjustment
+                        : self.coordinates.left+(self.$elem.width()) + adjustment;
+                        topValue = self.coordinates.top-(self.toolbar.height()/2)+(self.$elem.outerHeight()/2);
+                        break; 
                 case 'bottom':
-                    return {
-                        left: self.coordinates.left-(self.toolbar.width()/2)+(self.$elem.outerWidth()/2),
-                        top: self.coordinates.top+self.$elem.height()+adjustment,
+                        leftValue= self.coordinates.left-(self.toolbar.width()/2)+(self.$elem.outerWidth()/2);
+                        topValue = self.options.orientation == 'horizontal'
+                        ? self.coordinates.top+self.$elem.height()+adjustment
+                        : self.coordinates.top+self.$elem.height()+adjustment;
+                        break;
+            }
+
+            return {
+                        left: leftValue,
+                        top: topValue,
                         right: 'auto'
                     };
-            }
         },
 
         collisionDetection: function() {
@@ -235,6 +245,8 @@ if ( typeof Object.create !== 'function' ) {
     $.fn.toolbar.options = {
         content: '#myContent',
         position: 'top',
+        orientation: 'horizontal',
+        sticky: true,
         hideOnClick: false,
         zIndex: 120
     };
